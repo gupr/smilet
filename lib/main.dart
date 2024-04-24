@@ -1,7 +1,7 @@
 import 'package:date_count_down/date_count_down.dart';
 import 'package:flutter/material.dart';
 
-import 'signUpPage.dart';
+import 'SignUpPage.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,8 +17,13 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: WelcomePage(title: ""),
         theme: ThemeData(
+          // Background color of app
           scaffoldBackgroundColor: Color.fromARGB(255, 62, 71, 129),
           useMaterial3: true,
+          // Change page transition
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+            TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+          }),
 
           // Define the default brightness and colors.
           colorScheme: ColorScheme.fromSeed(
@@ -55,27 +60,32 @@ class _WelcomePageState extends State<WelcomePage> {
             Padding(
               padding: const EdgeInsets.all(60.0),
               child: SizedBox(
-                width: 220,
-                height: 220,
+                width: 300,
+                height: 300,
                 child: Image.asset(
                   'images/midnattslopp.png',
                   fit: BoxFit.scaleDown,
                 ),
               ),
             ),
-            Text(
-              'Det är ',
-            ),
+            Text('Det är ',
+                style: TextStyle(
+                  fontSize: 20,
+                )),
             CountDownText(
               due: DateTime.parse("2024-08-17"),
               finishedText: "ingen tid",
               showLabel: true,
               longDateName: false,
-              style: TextStyle(color: Colors.blue),
+              style: TextStyle(
+                  color: Color.fromARGB(255, 255, 243, 115),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
-            Text(
-              'kvar till Midnattsloppet!',
-            ),
+            Text('kvar till Midnattsloppet!',
+                style: TextStyle(
+                  fontSize: 20,
+                )),
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: TextButton(
@@ -84,7 +94,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => signUpPage()));
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
                   },
                   child: Text('Kom in', style: TextStyle(color: Colors.white))),
             ),
