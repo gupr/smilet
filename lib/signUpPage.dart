@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smilet/SchoolSelectPage.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final ButtonStyle updateStyle = ElevatedButton.styleFrom(
-        backgroundColor: Colors.green,
-        textStyle: const TextStyle(fontSize: 20));
-    final ButtonStyle deleteStyle = ElevatedButton.styleFrom(
-        backgroundColor: Colors.redAccent,
-        textStyle: const TextStyle(fontSize: 20));
+  _SignUpPageState createState() => _SignUpPageState();
+}
 
+class _SignUpPageState extends State<SignUpPage> {
+  int regNummer = 0;
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a `GlobalKey<FormState>`,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
     final textHeadStyle =
         TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold);
 
@@ -26,40 +33,72 @@ class SignUpPage extends StatelessWidget {
             height: 40,
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text('Skriv in ditt anmälningsnummer: ',
-                  style: textHeadStyle),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: SizedBox(
-                width: 300,
-                height: 64,
-                child: TextField(
-                  // Only allow number input
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Nummer',
+        // Form för att kunna använda TextFormField
+        body: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40.0),
+                  child: Text('Skriv in ditt anmälningsnummer: ',
+                      style: textHeadStyle),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 300,
+                    height: 64,
+                    child: TextFormField(
+                      // Only allow number input
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Nummer',
+                        hintText: 'Ange nummer',
+                      ),
+                      onSaved: (String? value) {},
+                      // Kolla numrets giltighet
+                      validator: (String? value) {
+                        return (value != null &&
+                                isValidRegNumber(int.parse(value)))
+                            ? 'Ogiltigt anmälningsnummer!'
+                            : null;
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 10, 179, 74),
-                  ),
-                  onPressed: () {},
-                  child: Text('Enter', style: TextStyle(color: Colors.white))),
-            ),
-          ],
-        ));
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ElevatedButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 10, 179, 74),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // If the form is valid, display a snackbar. In the real world,
+                          // you'd often call a server or save the information in a database.
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Anmälningsnummer giltigt!')),
+                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SchoolSelectPage()));
+                        }
+                      },
+                      child: const Text('Enter',
+                          style: TextStyle(color: Colors.white))),
+                ),
+              ],
+            )));
+  }
+
+  // Hjälparmetod för att avgöra om ett anmälningsnummer är giltigt
+  bool isValidRegNumber(int number) {
+    // TODO: vad är valid anmälningsnummer?
+    return (number < 1000);
   }
 }

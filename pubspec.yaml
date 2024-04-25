@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   date_count_down:
+  dropdown_button2: ^2.3.8
 
 dev_dependencies:
   flutter_test:
@@ -20,4 +21,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
+    - assets/images/
