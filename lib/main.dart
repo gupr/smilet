@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: 300,
                 height: 300,
                 child: Image.asset(
-                  'images/smilet.png',
+                  'assets/images/smilet.png',
                   fit: BoxFit.scaleDown,
                 ),
               ),

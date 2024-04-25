@@ -29,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Image.asset(
-            'images/ml_logo.png',
+            'assets/images/ml_logo.png',
             height: 40,
           ),
         ),
