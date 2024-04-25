@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 // DropdownMenuEntry labels and values for the first dropdown menu.
 enum School {
-  KTH('KTH'),
-  SU('SU'),
-  UU('UU');
+  kth('KTH'),
+  su('SU'),
+  uu('UU');
 
   const School(this.label);
   final String label;
@@ -12,9 +12,9 @@ enum School {
 
 // TODO Fixa dessa så de beror på skola
 enum Institution {
-  DISK('DISK'),
-  FYSIK('Fysik'),
-  JURIST('Jurist');
+  disk('DISK'),
+  fysik('Fysik'),
+  jurist('Jurist');
 
   const Institution(this.label);
   final String label;
@@ -47,12 +47,13 @@ class _SchoolSelectPageState extends State<SchoolSelectPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Välj din skola',
+              const Text('Välj din skola',
                   style: TextStyle(
                     fontSize: 20,
                   )),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               // Dropdown för skolor
               DropdownMenu<School>(
                 width: 200,
@@ -76,14 +77,14 @@ class _SchoolSelectPageState extends State<SchoolSelectPage> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 15),
-              Text(
+              const SizedBox(height: 15),
+              const Text(
                 'Välj din institution',
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               // Dropdown för institutioner
               DropdownMenu<Institution>(
                 width: 200,
@@ -107,7 +108,29 @@ class _SchoolSelectPageState extends State<SchoolSelectPage> {
                     label: institution.label,
                   );
                 }).toList(),
-              )
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 10, 179, 74),
+                  ),
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: const Text(
+                            'Error: Functionality not implemented yet'),
+                        action: SnackBarAction(
+                            label: 'Reset',
+                            textColor: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 234, 72, 51),
+                            onPressed: () {
+                              Navigator.popUntil(
+                                  context,
+                                  (Route<dynamic> predicate) =>
+                                      predicate.isFirst);
+                            })));
+                  },
+                  child: const Text('Enter',
+                      style: TextStyle(color: Colors.white))),
             ],
           ),
         ),

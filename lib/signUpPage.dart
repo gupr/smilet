@@ -81,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           // you'd often call a server or save the information in a database.
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
+                                duration: Duration(seconds: 1),
                                 content: Text('Anmälningsnummer giltigt!')),
                           );
                           Navigator.push(
