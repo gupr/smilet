@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
           scaffoldBackgroundColor: Color.fromARGB(255, 62, 71, 129),
           useMaterial3: true,
           // Change page transition
-          pageTransitionsTheme: PageTransitionsTheme(builders: {
+          pageTransitionsTheme: const PageTransitionsTheme(builders: {
             TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
           }),
 
@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: 300,
                 height: 300,
                 child: Image.asset(
-                  'images/midnattslopp.png',
+                  'images/smilet.png',
                   fit: BoxFit.scaleDown,
                 ),
               ),
@@ -88,7 +88,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 )),
             Padding(
               padding: const EdgeInsets.all(25.0),
-              child: TextButton(
+              child: ElevatedButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 249, 138, 11),
                   ),
@@ -96,7 +96,8 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => SignUpPage()));
                   },
-                  child: Text('Kom in', style: TextStyle(color: Colors.white))),
+                  child: Text('Kom in',
+                      style: TextStyle(fontSize: 20, color: Colors.white))),
             ),
           ],
         ),
