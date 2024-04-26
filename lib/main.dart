@@ -60,8 +60,8 @@ class _WelcomePageState extends State<WelcomePage> {
             Padding(
               padding: const EdgeInsets.all(60.0),
               child: SizedBox(
-                width: 300,
-                height: 300,
+                width: 250,
+                height: 250,
                 child: Image.asset(
                   'assets/images/smilet.png',
                   fit: BoxFit.scaleDown,
@@ -74,7 +74,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 )),
             CountDownText(
               due: DateTime.parse("2024-08-17"),
-              finishedText: "ingen tid",
+              finishedText: "ingen tid ",
               showLabel: true,
               longDateName: false,
               style: TextStyle(

@@ -61,8 +61,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       onSaved: (String? value) {},
                       // Kolla numrets giltighet
                       validator: (String? value) {
-                        return (value != null &&
-                                isValidRegNumber(int.parse(value)))
+                        int? valueInt = int.tryParse(value.toString());
+                        return (value != null && (isValidRegNumber(valueInt)))
                             ? 'Ogiltigt anmälningsnummer!'
                             : null;
                       },
@@ -98,7 +98,8 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   // Hjälparmetod för att avgöra om ett anmälningsnummer är giltigt
-  bool isValidRegNumber(int number) {
+  bool isValidRegNumber(int? number) {
+    if (number == null) return true;
     // TODO: vad är valid anmälningsnummer?
     return (number < 1000);
   }
